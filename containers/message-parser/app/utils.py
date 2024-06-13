@@ -32,13 +32,6 @@ from app.transport.http import http_request_with_retry
 DIBBS_REFERENCE_SIGNIFIER = "#REF#"
 
 
-def say_hi() -> str:
-    """
-    say hi
-    """
-    print("hi")
-
-
 @cache
 def load_parsing_schema(schema_name: str) -> dict:
     """
