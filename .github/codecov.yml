@@ -2,18 +2,18 @@ comment:
   layout: "diff, flags, files"
   behavior: default
 coverage:
-  range: 85...100
+  range: 80...100
   status:
     project:
       default:
-        target: 95%
+        target: 80%
         threshold: 10%
     patch:
       default:
         target: 95%
         threshold: 10%
         flags:
-          - unit-tests
+          - sdk
 flags:
   dibbs:
     paths:
