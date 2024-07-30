@@ -4,6 +4,47 @@
 
 The DIBBs message refiner service offers a REST API to pare down an incoming message to only the user-specified elements.
 
+```mermaid
+flowchart LR
+
+  subgraph client
+    direction TB
+    subgraph requests
+      hc
+      ecr
+      example
+    end
+  end
+
+  subgraph service[REST API]
+    direction TB
+    subgraph mr["fa:fa-docker container"]
+      refiner[message-refiner]
+    end
+
+    direction TB
+    subgraph tcr["fa:fa-docker container"]
+      tcr-service <==> db[(SQLite)]
+    end
+    mr <==> tcr
+  end
+
+  subgraph response
+    direction TB
+    subgraph formats
+      rsp-hc
+      rsp-ecr
+      rsp-example
+    end
+  end
+
+client ~~~ service ~~~ response
+
+hc -.-> mr -.-> rsp-hc
+ecr ==> mr ==> rsp-ecr
+example --> mr --> rsp-example
+```
+
 ### Running the eCR Refiner
 
 The message refiner can be run using Docker (or any other OCI container runtime e.g., Podman), or directly from the Python source code.
